@@ -1,0 +1,27 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "leleleehouse",email = "dayom0124@naver.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "fastapi (>=0.115.12,<0.116.0)",
+    "uvicorn (>=0.34.2,<0.35.0)",
+    "pydantic (>=2.11.4,<3.0.0)",
+    "pypdf (>=5.5.0,<6.0.0)",
+    "langchain-community (>=0.3.24,<0.4.0)",
+    "sentence-transformers (>=4.1.0,<5.0.0)",
+    "faiss-cpu (>=1.11.0,<2.0.0)",
+    "python-dotenv (>=1.1.0,<2.0.0)",
+    "openai (>=1.79.0,<2.0.0)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "langchain-openai (>=0.3.17,<0.4.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
