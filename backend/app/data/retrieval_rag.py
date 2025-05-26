@@ -47,7 +47,7 @@ Answer in Korean:
 """
 )
 
-llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0, max_tokens=1024)
+llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0, max_tokens=1024)
 
 
 # Use custom prompt with RetrievalQA

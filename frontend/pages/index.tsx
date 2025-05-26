@@ -8,8 +8,9 @@ export default function Home() {
 
   // 입력값 변경 시 전역 상태에 바로 반영
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type, checked } = e.target;
-    if (name === "diabetes" || name === "hypertension") {
+    const { name, value, type } = e.target;
+    if (type === 'checkbox' && e.target instanceof HTMLInputElement) {
+      const { checked } = e.target;
       setInfo({
         ...info,
         comorbidities: {
@@ -81,9 +82,9 @@ export default function Home() {
             고혈압
           </label>
         </div>
-        <div>
+        {/* <div>
           <label>투석 주기(회/주): <input name="dialysis_frequency" type="number" value={info.dialysis_frequency ?? 3} onChange={handleChange} required className="border p-1 rounded w-20" /></label>
-        </div>
+        </div> */}
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded mt-2">
           입력하고 궁합 진단하기
         </button>
@@ -94,6 +95,29 @@ export default function Home() {
       >
         추천 식단 보기
       </button>
+      <div className="mt-8 w-full max-w-md">
+        <h2 className="text-xl font-semibold mb-3">정보 및 가이드</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button
+            onClick={() => router.push("/checklist")}
+            className="bg-gray-200 text-gray-700 py-3 px-4 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            식단 체크리스트
+          </button>
+          <button
+            onClick={() => router.push("/faq")}
+            className="bg-gray-200 text-gray-700 py-3 px-4 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            자주 묻는 질문 (FAQ)
+          </button>
+          <button
+            onClick={() => router.push("/references")}
+            className="bg-gray-200 text-gray-700 py-3 px-4 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            참고 문헌
+          </button>
+        </div>
+      </div>
     </main>
   );
 }
