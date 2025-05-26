@@ -33,8 +33,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-4 text-center p-6">
-      <h1 className="text-3xl font-bold">혈액투석 환자 식단 추천 서비스</h1>
-      <p className="text-gray-600 mb-6">오늘의 건강한 식단과 음식 궁합을 확인하세요</p>
+      <h1 className="text-3xl font-bold">신장환자 식이 관련 챗봇</h1>
+      <p className="text-gray-600 mb-6">신장환자 식이에 대해 물어보세요</p>
       <form onSubmit={handleSubmit} className="space-y-2 w-full max-w-md text-left">
         <div>
           <label>나이: <input name="age" type="number" value={info.age ?? ""} onChange={handleChange} required className="border p-1 rounded w-20" /></label>

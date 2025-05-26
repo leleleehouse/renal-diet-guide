@@ -80,7 +80,7 @@ export default function ChatPage() {
     <main className="flex flex-col h-screen max-w-2xl mx-auto bg-[#F9FAFB] dark:bg-[#1a1a1a] text-[#333D4B] dark:text-white px-4 pt-6 pb-4">
       {/* Header */}
       <header className="flex items-center justify-between mb-4">
-        <h1 className="text-lg sm:text-2xl font-semibold">🍽️ 음식 궁합 진단</h1>
+        <h1 className="text-lg sm:text-2xl font-semibold">🍽️ 신장환자 식이 관련 챗봇</h1>
         <button
           onClick={() => router.push("/")}
           className="text-[#3182F6] text-sm font-medium hover:underline"
@@ -93,7 +93,7 @@ export default function ChatPage() {
       <section className="flex-1 overflow-y-auto space-y-4 pr-1 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
         {messages.length === 0 && (
           <div className="text-center text-[#8B95A1] mt-12">
-            <p className="text-base">음식 궁합에 대해 물어보세요!</p>
+            <p className="text-base">식이에 대해 물어보세요!</p>
             <p className="text-sm mt-1 italic text-[#A1AAB3]">
               예: "사과와 바나나를 같이 먹어도 될까요?"
             </p>
@@ -143,7 +143,7 @@ export default function ChatPage() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="음식 궁합에 대해 물어보세요..."
+          placeholder="식이에 대해 물어보세요..."
           className="flex-1 px-4 py-2 rounded-lg border border-[#D1D6DB] dark:border-[#3a3d40] 
                      bg-white dark:bg-[#1a1a1a] text-sm focus:outline-none 
                      focus:ring-2 focus:ring-[#3182F6] focus:border-transparent
