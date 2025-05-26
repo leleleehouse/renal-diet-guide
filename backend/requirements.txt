@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+jinja2
+requests
+
+# RAG and ML dependencies
+langchain
+langchain-community
+langchain-openai # OpenAI 모델을 사용한다면 주석 해제
+faiss-cpu # 또는 faiss-gpu, 환경에 맞게 선택
+sentence-transformers
+pandas
+numpy 
