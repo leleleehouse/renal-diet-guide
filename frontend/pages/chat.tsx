@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { usePatientStore } from "../stores/usePatientStore";
+import { usePatientStore} from "../stores/usePatientStore";
+import { formatMarkdown} from "../stores/formatMarkdown";
 import { useRouter } from "next/router";
 
 interface Message {
@@ -99,23 +100,25 @@ export default function ChatPage() {
           </div>
         )}
 
-        {messages.map((message, index) => (
+      {messages.map((message, index) => (
+        <div
+          key={index}
+          className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+        >
           <div
-            key={index}
-            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+            className={`max-w-[75%] px-4 py-2 text-sm leading-relaxed shadow-md transition-all
+              rounded-2xl ${
+                message.role === "user"
+                  ? "bg-[#3182F6] text-white rounded-br-none"
+                  : "bg-white text-[#333D4B] dark:bg-[#2a2d30] dark:text-white rounded-bl-none"
+              }`}
           >
-            <div
-              className={`max-w-[75%] px-4 py-2 text-sm leading-relaxed shadow-md transition-all
-                  rounded-2xl ${
-                    message.role === "user"
-                      ? "bg-[#3182F6] text-white rounded-br-none"
-                      : "bg-white text-[#333D4B] dark:bg-[#2a2d30] dark:text-white rounded-bl-none"
-                  }`}
-            >
-              {message.content}
-            </div>
+            {message.role === "assistant"
+              ? formatMarkdown(message.content)
+              : message.content}
           </div>
-        ))}
+        </div>
+      ))}
 
         {isLoading && (
           <div className="flex justify-start pl-1">

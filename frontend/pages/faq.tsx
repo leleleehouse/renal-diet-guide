@@ -1,6 +1,9 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 const FaqPage = () => {
+  const router = useRouter();
+
   const faqItems = [
     {
       question: '카페에선 무엇을 먹을 수 있나요?',
@@ -20,18 +23,35 @@ const FaqPage = () => {
   ];
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">만성 신부전 Q&A</h1>
-      <div className="space-y-4">
+    <div className="max-w-xl mx-auto p-6">
+      <h1 className="text-xl sm:text-2xl font-semibold mb-6 text-[#1e1e1e] dark:text-white">
+        💬 만성 신부전 Q&A
+      </h1>
+      <div className="space-y-4 mb-8">
         {faqItems.map((item, index) => (
-          <div key={index} className="p-4 border rounded-lg">
-            <h2 className="text-xl font-semibold mb-2">Q. {item.question}</h2>
-            <p>A. {item.answer}</p>
+          <div
+            key={index}
+            className="bg-white dark:bg-[#1c1f23] border border-[#d1d6db] dark:border-[#3a3d40] rounded-2xl p-5 shadow-sm hover:shadow-md transition-all"
+          >
+            <h2 className="text-base sm:text-lg font-semibold text-[#3182F6] mb-2">
+              Q. {item.question}
+            </h2>
+            <p className="text-sm sm:text-base text-[#333d4b] dark:text-white leading-relaxed">
+              A. {item.answer}
+            </p>
           </div>
         ))}
+      </div>
+      <div className="text-center">
+        <button
+          onClick={() => router.push("/")}
+          className="px-4 py-2 bg-[#3182F6] text-white rounded-lg hover:bg-[#1e6ae1] transition duration-200 font-semibold"
+        >
+          홈으로 돌아가기
+        </button>
       </div>
     </div>
   );
 };
 
-export default FaqPage; 
+export default FaqPage;

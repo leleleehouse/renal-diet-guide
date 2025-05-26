@@ -1,6 +1,9 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 const ChecklistPage = () => {
+  const router = useRouter();
+
   const checklistItems = [
     '채소는 데치거나 삶아서 칼륨을 줄인 뒤 섭취했나요?',
     '끼니마다 고기, 생선, 달걀, 두부 등 적절한 단백질을 포함했나요?',
@@ -10,20 +13,36 @@ const ChecklistPage = () => {
   ];
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">만성 신부전 환자 식단 체크리스트</h1>
-      <ul className="list-disc pl-5">
+    <div className="max-w-xl mx-auto p-6">
+      <h1 className="text-xl sm:text-2xl font-semibold mb-6 text-[#1e1e1e] dark:text-white">
+        ✅ 만성 신부전 환자 식단 체크리스트
+      </h1>
+      <div className="space-y-4 mb-8">
         {checklistItems.map((item, index) => (
-          <li key={index} className="mb-2">
-            <label className="flex items-center">
-              <input type="checkbox" className="mr-2" />
+          <label
+            key={index}
+            className="flex items-start bg-white dark:bg-[#1c1f23] border border-[#d1d6db] dark:border-[#3a3d40] rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer gap-3"
+          >
+            <input
+              type="checkbox"
+              className="mt-1 accent-[#3182F6] w-5 h-5 shrink-0"
+            />
+            <span className="text-sm sm:text-base text-[#333d4b] dark:text-white leading-snug">
               {item}
-            </label>
-          </li>
+            </span>
+          </label>
         ))}
-      </ul>
+      </div>
+      <div className="text-center">
+        <button
+          onClick={() => router.push("/")}
+          className="px-4 py-2 bg-[#3182F6] text-white rounded-lg hover:bg-[#1e6ae1] transition duration-200 font-semibold"
+        >
+          홈으로 돌아가기
+        </button>
+      </div>
     </div>
   );
 };
 
-export default ChecklistPage; 
+export default ChecklistPage;

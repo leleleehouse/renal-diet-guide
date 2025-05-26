@@ -4,12 +4,28 @@ import itertools
 from app.logic.nutrition_target import get_targets
 from app.data.retrieval_rag import qa
 import random
+import requests
 
-# 절대 경로 기반 JSON 파일 로드
-file_path = os.path.join(os.path.dirname(__file__), "data", "parsed_food_db.json")
-with open(file_path, "r", encoding="utf-8") as f:
-    food_items = json.load(f)
+def load_food_items():
+    file_path = os.path.join(os.path.dirname(__file__), "data", "parsed_food_db.json")
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+def download_and_load_food_items() -> list[dict]:
+    url = "https://huggingface.co/datasets/leleleehouse/renal-food-db/raw/main/parsed_food_db.json"
+    local_path = "/tmp/parsed_food_db.json"
 
+    if not os.path.exists(local_path):
+        print("[INFO] .json 파일 다운로드 중...")
+        response = requests.get(url)
+        response.raise_for_status()
+        with open(local_path, "wb") as f:
+            f.write(response.content)
+        print("[INFO] 다운로드 완료:", local_path)
+    else:
+        print("[INFO] 캐시된 파일 사용:", local_path)
+
+    with open(local_path, "r", encoding="utf-8") as f:
+        return json.load(f)
 def score(meal_list, targets):
     total = {
         "kcal": 0,
@@ -40,7 +56,8 @@ def recommend_meal(info: dict, retriever=None):
     except Exception as e:
         print("[ERROR] 타겟 계산 실패:", e)
         raise
-
+    
+    food_items = download_and_load_food_items()
     # RAG를 통한 식이 조언 획득
     rag_query = f"""
     나는 {info.get('age', '알 수 없음')}세 {info.get('gender', '알 수 없음')}성 신장투석 환자입니다.

@@ -86,15 +86,15 @@ export default function Home() {
           <label>투석 주기(회/주): <input name="dialysis_frequency" type="number" value={info.dialysis_frequency ?? 3} onChange={handleChange} required className="border p-1 rounded w-20" /></label>
         </div> */}
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded mt-2">
-          입력하고 궁합 진단하기
+          신장 전문 챗봇과 대화하기
         </button>
       </form>
-      <button
+      {/* <button
         onClick={() => router.push("/recommend")}
         className="w-full bg-green-500 text-white py-2 rounded mt-4 max-w-md"
       >
         추천 식단 보기
-      </button>
+      </button> */}
       <div className="mt-8 w-full max-w-md">
         <h2 className="text-xl font-semibold mb-3">정보 및 가이드</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

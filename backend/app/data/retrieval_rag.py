@@ -47,7 +47,7 @@ Answer in Korean:
 """
 )
 
-llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0, max_tokens=1024)
+llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3, max_tokens=1025)
 
 
 # Use custom prompt with RetrievalQA
@@ -58,10 +58,10 @@ qa = RetrievalQA.from_chain_type(
     chain_type_kwargs={"prompt": prompt}
 )
 
-# Query must be passed as plain string to match expected 'question' input
-query = "사과 먹어도 돼?"
-result = qa.invoke({"query": query})
+# # Query must be passed as plain string to match expected 'question' input
+# query = "사과 먹어도 돼?"
+# result = qa.invoke({"query": query})
 
-# 💬 출력 (길이 잘림 방지)
-print("💬 Answer:")
-print(json.dumps(result, ensure_ascii=False, indent=2))
+# # 💬 출력 (길이 잘림 방지)
+# print("💬 Answer:")
+# print(json.dumps(result, ensure_ascii=False, indent=2))
