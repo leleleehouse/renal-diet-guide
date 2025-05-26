@@ -88,10 +88,15 @@ def build_and_save_vectorstore(docs: list[Document],
     print(f"[저장] 벡터스토어가 '{save_dir}'에 저장되었습니다.\n")
 
 def main():
-    pdf_dir         = "/Users/idahyeon/renal-diet-guide/backend/app/data/rag_data/pdf"
-    csv_path        = "/Users/idahyeon/renal-diet-guide/backend/app/data/rag_data/csv/20250408_음식DB.csv"
-    docs_json_path  = "/Users/idahyeon/renal-diet-guide/backend/app/data/rag_data/docs.json"
-    vector_save_dir = "/Users/idahyeon/renal-diet-guide/backend/app/data/rag_data"
+    # 현재 파일의 디렉토리 경로 (backend/app/data)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # rag_data 디렉토리 (backend/app/data/rag_data)
+    rag_data_base_dir = os.path.join(current_dir, "rag_data")
+
+    pdf_dir         = os.path.join(rag_data_base_dir, "pdf")
+    csv_path        = os.path.join(rag_data_base_dir, "csv", "20250408_음식DB.csv")
+    docs_json_path  = os.path.join(rag_data_base_dir, "docs.json")
+    vector_save_dir = rag_data_base_dir # 벡터 저장소는 rag_data 디렉토리 자체
 
     # 1) PDF
     pdf_docs = load_pdf_pages(pdf_dir)

@@ -5,6 +5,7 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 import json
 from dotenv import load_dotenv
+import os
 
 
 # Load environment variables from .env
@@ -18,8 +19,13 @@ embedding = HuggingFaceEmbeddings(
 )
 
 # Load FAISS vectorstore
+# 현재 파일의 디렉토리 경로 (backend/app/data)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# FAISS 벡터 저장소 경로 (backend/app/data/rag_data)
+vectorstore_path = os.path.join(current_dir, "rag_data")
+
 vectorstore = FAISS.load_local(
-    "/Users/idahyeon/renal-diet-guide/backend/app/data/rag_data",
+    vectorstore_path, # 수정된 경로 사용
     embeddings=embedding,
     allow_dangerous_deserialization=True
 )
