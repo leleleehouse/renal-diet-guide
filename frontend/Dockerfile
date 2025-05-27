@@ -1,12 +1,12 @@
 # 1. Node.js 공식 이미지 사용
-FROM node:18
+FROM node:20
 
 # 2. 작업 디렉토리 설정
 WORKDIR /app
 
 # 3. 의존성 설치
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
 # 4. 소스 복사
 COPY . .
