@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: renal-frontend
+    env: node
+    branch: main
+    region: oregon  # 필요 시 다른 리전으로 변경 가능
+    buildCommand: npm run build
+    startCommand: npm start
+    rootDir: frontend  # Next.js 프론트 폴더명
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://renal-diet-guide.onrender.com

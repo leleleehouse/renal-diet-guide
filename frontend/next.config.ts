@@ -1,9 +1,7 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    optimizeCss: false, // lightningcss 비활성화 (중요)
+    optimizeCss: false, // LightningCSS 비활성화 (진짜로 꺼짐)
   },
 };
 
