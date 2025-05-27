@@ -1,5 +1,5 @@
 # 1. Node.js 공식 이미지 사용
-FROM node:18
+FROM node:20
 
 # 2. 작업 디렉토리 설정
 WORKDIR /app
