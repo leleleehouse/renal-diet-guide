@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { useRouter } from 'next/router';
-import { usePatientStore } from '../stores/usePatientStore';
+import { usePatientStore, PatientInfo } from '../stores/usePatientStore';
 import {
   Card,
   CardHeader,
@@ -27,27 +26,30 @@ export default function ProfileForm() {
   const router = useRouter();
   const { info, setInfo } = usePatientStore();
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (name === 'diabetes' || name === 'hypertension') {
-      setInfo({ comorbidities: { ...info.comorbidities, [name]: checked } });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    if (e.target instanceof HTMLInputElement && e.target.type === 'checkbox') {
+      const { checked } = e.target;
+      if (name === 'diabetes' || name === 'hypertension') {
+        setInfo({ comorbidities: { ...info.comorbidities, [name]: checked } });
+      }
     } else {
       setInfo({ [name]: value });
     }
   };
 
-  const validateNumber = (field, val) => {
+  const validateNumber = (val: string | number): boolean => {
     const num = Number(val);
     return val !== '' && !isNaN(num) && num > 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const required = ['age', 'height', 'weight'];
-    const invalid = required.filter((field) => !validateNumber(field, info[field]));
+    const requiredFields: Array<keyof Pick<PatientInfo, 'age' | 'height' | 'weight'>> = ['age', 'height', 'weight'];
+    const invalidFields = requiredFields.filter(field => !validateNumber(info[field]));
 
-    if (invalid.length) {
-      alert('나이, 키, 체중을 올바르게 입력해주세요.');
+    if (invalidFields.length) {
+      alert(`${invalidFields.join(', ')} 항목을 올바르게 입력해주세요.`);
       return;
     }
 
@@ -142,11 +144,21 @@ export default function ProfileForm() {
               <Label className="block">동반질환</Label>
               <div className="flex gap-6 mt-2">
                 <div className="flex items-center">
-                  <Checkbox id="diabetes" name="diabetes" checked={info.comorbidities.diabetes} onCheckedChange={(ch) => setInfo({ comorbidities: { ...info.comorbidities, diabetes: ch } })} />
+                  <Checkbox 
+                    id="diabetes" 
+                    name="diabetes" 
+                    checked={Boolean(info.comorbidities.diabetes)} 
+                    onCheckedChange={(ch) => setInfo({ comorbidities: { ...info.comorbidities, diabetes: Boolean(ch) } })} 
+                  />
                   <Label htmlFor="diabetes" className="ml-2">당뇨</Label>
                 </div>
                 <div className="flex items-center">
-                  <Checkbox id="hypertension" name="hypertension" checked={info.comorbidities.hypertension} onCheckedChange={(ch) => setInfo({ comorbidities: { ...info.comorbidities, hypertension: ch } })} />
+                  <Checkbox 
+                    id="hypertension" 
+                    name="hypertension" 
+                    checked={Boolean(info.comorbidities.hypertension)} 
+                    onCheckedChange={(ch) => setInfo({ comorbidities: { ...info.comorbidities, hypertension: Boolean(ch) } })} 
+                  />
                   <Label htmlFor="hypertension" className="ml-2">고혈압</Label>
                 </div>
               </div>

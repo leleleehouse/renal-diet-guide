@@ -1,4 +1,3 @@
-
 import { create } from "zustand";
 
 type Comorbidities = {
@@ -6,7 +5,7 @@ type Comorbidities = {
   hypertension: boolean;
 };
 
-type PatientInfo = {
+export type PatientInfo = {
   age: string;
   gender: string;
   height: string;

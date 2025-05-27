@@ -35,8 +35,12 @@ export default function RecommendPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            ...info,
-            dialysis_frequency: (info as any).dialysis_frequency ?? 3,
+            age: info.age,
+            gender: info.gender,
+            height: info.height,
+            weight: info.weight,
+            dialysisType: info.dialysisType,
+            urineOutput: info.urineOutput,
             comorbidities: {
               diabetes: info.comorbidities?.diabetes ?? false,
               hypertension: info.comorbidities?.hypertension ?? false,
@@ -51,8 +55,12 @@ export default function RecommendPage() {
         } else {
           setMeal(data);
         }
-      } catch (err: any) {
-        setError("서버 요청 실패: " + err.message);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError("서버 요청 실패: " + err.message);
+        } else {
+          setError("알 수 없는 오류가 발생했습니다.");
+        }
       } finally {
         setLoading(false);
       }

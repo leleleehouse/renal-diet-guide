@@ -45,8 +45,12 @@ export default function ChatPage() {
         body: JSON.stringify({
           message: userMessage,
           patient_info: {
-            ...info,
-            dialysis_frequency: info.dialysis_frequency ?? 3,
+            age: info.age,
+            gender: info.gender,
+            height: info.height,
+            weight: info.weight,
+            dialysisType: info.dialysisType,
+            urineOutput: info.urineOutput,
             comorbidities: {
               diabetes: info.comorbidities?.diabetes ?? false,
               hypertension: info.comorbidities?.hypertension ?? false,
@@ -64,6 +68,7 @@ export default function ChatPage() {
         { role: "assistant", content: data.response },
       ]);
     } catch (error) {
+      console.error("Chat API error:", error);
       setMessages((prev) => [
         ...prev,
         {
@@ -95,7 +100,7 @@ export default function ChatPage() {
           <div className="text-center text-[#8B95A1] mt-12">
             <p className="text-base">식이에 대해 물어보세요!</p>
             <p className="text-sm mt-1 italic text-[#A1AAB3]">
-              예: "사과와 바나나를 같이 먹어도 될까요?"
+              예: &quot;사과와 바나나를 같이 먹어도 될까요?&quot;
             </p>
           </div>
         )}
