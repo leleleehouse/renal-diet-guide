@@ -7,7 +7,6 @@ WORKDIR /app
 # 3. 의존성 설치
 COPY package*.json ./
 RUN npm install
-RUN npm rebuild lightningcss --force
 # 4. 소스 복사
 COPY . .
 
