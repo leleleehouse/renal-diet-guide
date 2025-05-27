@@ -1,20 +1,21 @@
-# Use an official Node.js runtime as the base image
+# 1. Node.js 공식 이미지 사용
 FROM node:18
 
-# Set the working directory in the container
+# 2. 작업 디렉토리 설정
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# 3. 의존성 설치
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# 4. 소스 복사
 COPY . .
 
-# Expose the port the app runs on
+# 5. **프로덕션 빌드 수행**
+RUN npm run build
+
+# 6. 포트 노출 (Next.js는 기본적으로 3000번 포트 사용)
 EXPOSE 3000
 
-# Start the application
+# 7. 앱 실행
 CMD ["npm", "start"]
