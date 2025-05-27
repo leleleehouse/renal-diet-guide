@@ -7,9 +7,10 @@ WORKDIR /app
 # 3. 의존성 설치
 COPY package*.json ./
 RUN npm install
+
 # 4. 소스 복사
 COPY . .
-
+ENV LIGHTNINGCSS_FORCE_SYSTEM_BINARY=true
 # 5. **프로덕션 빌드 수행**
 RUN npm run build
 
